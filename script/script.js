@@ -16,14 +16,15 @@ containerHeader.append(inputElem);
 containerHeader.append(inputBtn);
 rootElem.append(containerHeader);
 
-for (let i = 0; i<data.length; i++){
+
+function addForm(elem) {
     let container = document.createElement('div');
     let checkbox = document.createElement('input');
     checkbox.setAttribute('type',"checkbox");
     let todoElem = document.createElement('p');
     let closeElem = document.createElement('div');
 
-    todoElem.innerHTML = data[i].todo;
+    todoElem.innerHTML = elem;
     closeElem.innerHTML = '&#10008;';
 
     container.classList.add('container');
@@ -48,36 +49,12 @@ for (let i = 0; i<data.length; i++){
     })
 }
 
+for (let i = 0; i<data.length; i++){
+    addForm(data[i].todo)
+}
+
 inputBtn.addEventListener('click', function () {
     let textInput = inputElem.value;
-    let container = document.createElement('div');
-    let checkbox = document.createElement('input');
-    checkbox.setAttribute('type',"checkbox");
-    let todoElem = document.createElement('p');
-    let closeElem = document.createElement('div');
-
-    todoElem.innerHTML = textInput;
-    closeElem.innerHTML = '&#10008;';
-
-    container.classList.add('container');
-    todoElem.classList.add('todoList');
-    closeElem.classList.add('close');
-
-    container.append(checkbox);
-    container.append(todoElem);
-    container.append(closeElem);
-    rootElem.append(container);
-
-    checkbox.addEventListener('click', function () {
-        if (this.checked) {
-            checkbox.closest('.container').style.opacity = '0.5';
-
-        } else {
-            checkbox.closest('.container').style.opacity = '1';
-        }
-    })
-    closeElem.addEventListener('click', function () {
-        closeElem.closest('.container').remove();
-    })
+    addForm(textInput)
     inputElem.value = '';
 })
